@@ -1,8 +1,10 @@
+import { Meteor } from 'meteor/meteor';
+import { Products } from '../imports/api/products.js';
 import { Fake } from 'meteor/anti:fake';
 
 Meteor.startup(function () {
   if (Products.find().count()===0){
-     for (var i = 0; i < 200; i++) {
+     for (var i = 0; i < 5; i++) {
       let product = Fake.word();
       let price = Math.random() * (1000 - 1) + 1;
 
