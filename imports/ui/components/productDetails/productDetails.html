@@ -1,1 +1,9 @@
-The party your selected is: {{ productDetails.name }}
+The party your selected is:
+<form>
+  Party name: <input type="text" ng-model="productDetails.product.name" />
+  Description: <input type="text" ng-model="productDetails.product.price" />
+  <button ng-click="productDetails.save()">Save</button>
+
+</form>
+
+<a ui-sref="products">back</a>
