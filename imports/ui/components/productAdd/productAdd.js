@@ -1,7 +1,8 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
- import { Products } from '../../../api/products.js';
+ import { Products } from '../../../api/products/index';
 import './productAdd.html';
+import { Meteor } from 'meteor/meteor';
  
 class AddProduct {
   constructor() {
@@ -9,7 +10,8 @@ class AddProduct {
   }
 
   submit(){
-    console.log("submitted!");
+    
+    this.product.owner = Meteor.user()._id;
     Products.insert(this.product);
     this.reset();
     console.log("Successfully inserted product!");

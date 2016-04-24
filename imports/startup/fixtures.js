@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor';
-import { Products } from '../imports/api/products.js';
+import { Products } from '../api/products/index';
 import { Fake } from 'meteor/anti:fake';
 
 Meteor.startup(function () {
@@ -10,7 +10,8 @@ Meteor.startup(function () {
 
       Products.insert({
         name: product,
-        price: price.toFixed(2)
+        price: price.toFixed(2),
+        public: true
       })
     }
   }

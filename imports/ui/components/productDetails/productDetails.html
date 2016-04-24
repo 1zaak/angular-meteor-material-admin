@@ -1,9 +1,15 @@
-The party your selected is:
+The product your selected is:
 <form>
-  Party name: <input type="text" ng-model="productDetails.product.name" />
-  Description: <input type="text" ng-model="productDetails.product.price" />
-  <button ng-click="productDetails.save()">Save</button>
-
+    Product name:
+    <input type="text" ng-model="productDetails.product.name" /> Product price:
+    <input type="text" ng-model="productDetails.product.price" /> Public Product?
+    <input type="checkbox" ng-model="productDetails.product.public">
+    <button ng-click="productDetails.save()">Save</button>
+    <ul>
+        Users:
+        <li ng-repeat="user in productDetails.users">
+            <div>{{ user.emails[0].address }}</div>
+        </li>
+    </ul>
 </form>
-
 <a ui-sref="products">back</a>

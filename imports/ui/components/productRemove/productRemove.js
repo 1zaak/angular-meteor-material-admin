@@ -1,6 +1,6 @@
 import angular from 'angular';
 import angularMeteor from 'angular-meteor';
- import { Products } from '../../../api/products.js';
+ import { Products } from '../../../api/products/index';
 import './productRemove.html';
  
 class ProductRemove {

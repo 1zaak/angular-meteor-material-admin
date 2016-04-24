@@ -18,18 +18,51 @@ export default angular.module(name, [
     ngMaterial,
     ProductsList,
     ProductDetails,
-    Navigation
+    Navigation,
+    'accounts.ui'
 ]).component(name, {
     templateUrl: `imports/ui/components/${name}/${name}.html`,
     controllerAs: name,
     controller: EcogivAdmin
 })
-  .config(config);
+  .config(config)
+  .run(run);
  
-function config($locationProvider, $urlRouterProvider) {
+function config($locationProvider, $urlRouterProvider, $mdIconProvider) {
   'ngInject';
  
   $locationProvider.html5Mode(true);
  
   $urlRouterProvider.otherwise('/products');
+
+  const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
+ 
+  $mdIconProvider
+    .iconSet('social',
+      iconPath + 'svg-sprite-social.svg')
+    .iconSet('action',
+      iconPath + 'svg-sprite-action.svg')
+    .iconSet('communication',
+      iconPath + 'svg-sprite-communication.svg')
+    .iconSet('content',
+      iconPath + 'svg-sprite-content.svg')
+    .iconSet('toggle',
+      iconPath + 'svg-sprite-toggle.svg')
+    .iconSet('navigation',
+      iconPath + 'svg-sprite-navigation.svg')
+    .iconSet('image',
+      iconPath + 'svg-sprite-image.svg');
+}
+
+function run($rootScope, $state) {
+  'ngInject';
+  
+  $rootScope.$on('$stateChangeError',
+    (event, toState, toParams, fromState, fromParams, error) => {
+      if (error === 'AUTH_REQUIRED') {
+        console.log("No entry");
+        $state.go('products');
+      }
+    }
+  );
 }

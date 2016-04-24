@@ -1,10 +1,61 @@
 <product-add></product-add>
+<br/>
+<input type="search" ng-model="productsList.searchText" placeholder="Search" />
+ 
+<br/>
+<products-sort on-change="productsList.sortChanged(sort)" property="name" order="1"></products-sort>
 
 <ul>
-    <li ng-repeat="product in productsList.products">
+    <li dir-paginate="product in productsList.products | itemsPerPage: productsList.perPage" total-items="productsList.productsCount">
+        <a ui-sref="productsList({ productId: product._id })">
+            <strong>{{product.name | uppercase}}</strong>
+        </a>
+        <!--  <li ng-repeat="product in productsList.products">
         <a ui-sref="productDetails({ productId: product._id , productName: product.name})">
       {{product.name}}
-    </a>(RM{{product.price}})
+    </a> -->
+        (RM{{product.price}})
         <product-remove product="product"></product-remove>
     </li>
 </ul>
+<dir-pagination-controls on-page-change="productsList.pageChanged(newPageNumber)"></dir-pagination-controls>
+TOTAL : {{productsList.productsCount}} products
+<!-- <table st-table="productsList.products" class="table table-striped">
+  <thead>
+  <tr>
+    <th>Product name</th>
+    <th>Product price</th>
+    
+  </tr>
+  </thead>
+  <tbody>
+  <tr ng-repeat="product in productsList.products">
+    <td>{{product.name | uppercase}}</td>
+    <td>RM{{product.price}}</td>
+    
+  </tr>
+  </tbody>
+</table> -->
+<md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools">
+        <span>Products</span>
+    </div>
+</md-toolbar>
+<md-table-container>
+    <table md-table multiple ng-model="selected">
+        <!-- md-row-select to enable row select -->
+        <thead md-head>
+            <tr md-row>
+                <th md-column><span>Products</span></th>
+                <th md-column md-numeric><span>Price</span></th>
+            </tr>
+        </thead>
+        <tbody md-body>
+            <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="product in productsList.products">
+                <td md-cell>{{product.name | uppercase}}</td>
+                <td md-cell>RM{{product.price}}</td>
+            </tr>
+        </tbody>
+    </table>
+</md-table-container>
+<md-table-pagination md-limit="productsList.query.limit" md-limit-options="[5, 10, 15]" md-page="productsList.query.page" md-total="{{productsList.products.count}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
