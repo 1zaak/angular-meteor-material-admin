@@ -28,7 +28,7 @@ export default angular.module(name, [
   .config(config)
   .run(run);
  
-function config($locationProvider, $urlRouterProvider, $mdIconProvider) {
+function config($locationProvider, $urlRouterProvider, $mdIconProvider, $mdThemingProvider) {
   'ngInject';
  
   $locationProvider.html5Mode(true);
@@ -37,30 +37,37 @@ function config($locationProvider, $urlRouterProvider, $mdIconProvider) {
 
   const iconPath =  '/packages/planettraining_material-design-icons/bower_components/material-design-icons/sprites/svg-sprite/';
  
+
+  $mdThemingProvider.theme('default')
+    .primaryPalette('amber', {
+      'default': '400', // by default use shade 400 from the pink palette for primary intentions
+      'hue-1': '100', // use shade 100 for the <code>md-hue-1</code> class
+      'hue-2': '600', // use shade 600 for the <code>md-hue-2</code> class
+      'hue-3': 'A100' // use shade A100 for the <code>md-hue-3</code> class
+    })
+    // If you specify less than all of the keys, it will inherit from the
+    // default shades
+    .accentPalette('pink', {
+      'default': '400' // use shade 200 for default, and keep all other shades the same
+    });
+
   $mdIconProvider
     .iconSet('social',
       iconPath + 'svg-sprite-social.svg')
     .iconSet('action',
       iconPath + 'svg-sprite-action.svg')
-    .iconSet('communication',
-      iconPath + 'svg-sprite-communication.svg')
-    .iconSet('content',
+      .iconSet('content',
       iconPath + 'svg-sprite-content.svg')
-    .iconSet('toggle',
-      iconPath + 'svg-sprite-toggle.svg')
-    .iconSet('navigation',
-      iconPath + 'svg-sprite-navigation.svg')
-    .iconSet('image',
-      iconPath + 'svg-sprite-image.svg');
+    
 }
 
-function run($rootScope, $state) {
+function run($rootScope, $state, $mdToast) {
   'ngInject';
   
   $rootScope.$on('$stateChangeError',
     (event, toState, toParams, fromState, fromParams, error) => {
       if (error === 'AUTH_REQUIRED') {
-        console.log("No entry");
+        $mdToast.show($mdToast.simple().textContent('No Entry!'));
         $state.go('products');
       }
     }

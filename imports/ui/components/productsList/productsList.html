@@ -1,61 +1,71 @@
-<product-add></product-add>
-<br/>
-<input type="search" ng-model="productsList.searchText" placeholder="Search" />
- 
-<br/>
-<products-sort on-change="productsList.sortChanged(sort)" property="name" order="1"></products-sort>
-
-<ul>
-    <li dir-paginate="product in productsList.products | itemsPerPage: productsList.perPage" total-items="productsList.productsCount">
-        <a ui-sref="productsList({ productId: product._id })">
-            <strong>{{product.name | uppercase}}</strong>
-        </a>
-        <!--  <li ng-repeat="product in productsList.products">
-        <a ui-sref="productDetails({ productId: product._id , productName: product.name})">
-      {{product.name}}
-    </a> -->
-        (RM{{product.price}})
-        <product-remove product="product"></product-remove>
-    </li>
-</ul>
-<dir-pagination-controls on-page-change="productsList.pageChanged(newPageNumber)"></dir-pagination-controls>
-TOTAL : {{productsList.productsCount}} products
-<!-- <table st-table="productsList.products" class="table table-striped">
-  <thead>
-  <tr>
-    <th>Product name</th>
-    <th>Product price</th>
-    
-  </tr>
-  </thead>
-  <tbody>
-  <tr ng-repeat="product in productsList.products">
-    <td>{{product.name | uppercase}}</td>
-    <td>RM{{product.price}}</td>
-    
-  </tr>
-  </tbody>
-</table> -->
-<md-toolbar class="md-table-toolbar md-default">
-    <div class="md-toolbar-tools">
-        <span>Products</span>
-    </div>
+<!-- <div > -->
+<!-- <product-add></product-add> -->
+<!-- <md-button class="md-primary md-raised" ng-click="productsList.showAdd($event)">Add</md-button> -->
+<md-toolbar class="md-hue-1 md-whiteframe-z2" layout="row" layout-align="start center">
+    <!-- Use floating label instead of placeholder -->
+    <md-icon class="icon-search" md-svg-icon="action:ic_search_24px" flex="5"></md-icon>
+    <input class="input-main" md-input ng-model="productsList.searchText" type="text" placeholder="SEARCH" flex="80">
+    <login-buttons flex="15" class="md-hue-2" align="left"></login-buttons>
 </md-toolbar>
-<md-table-container>
-    <table md-table multiple ng-model="selected">
-        <!-- md-row-select to enable row select -->
-        <thead md-head>
-            <tr md-row>
-                <th md-column><span>Products</span></th>
-                <th md-column md-numeric><span>Price</span></th>
-            </tr>
-        </thead>
-        <tbody md-body>
-            <tr md-row md-select="dessert" md-select-id="name" md-auto-select ng-repeat="product in productsList.products">
-                <td md-cell>{{product.name | uppercase}}</td>
-                <td md-cell>RM{{product.price}}</td>
-            </tr>
-        </tbody>
-    </table>
-</md-table-container>
-<md-table-pagination md-limit="productsList.query.limit" md-limit-options="[5, 10, 15]" md-page="productsList.query.page" md-total="{{productsList.products.count}}" md-on-paginate="getDesserts" md-page-select></md-table-pagination>
+<md-card>
+    <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="productsList.showAdd($event)">
+        <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
+    </md-button>
+    <!-- <div ng-hide="productsList.isLoggedIn">
+        <i>Log in to create a product!</i>
+    </div>
+    <div flex>
+        <h2 class="md-display-1">List the products:</h2>
+    </div> -->
+    <!-- <md-head><md-input-container ><md-icon md-svg-icon="action:ic_search_24px"></md-icon><input md-input ng-model="productsList.searchText" type="text" placeholder="Search"></md-input-container></md-head>
+<md-toolbar class="md-table-toolbar md-default">
+    <div class="md-toolbar-tools" layout="row" layout-align="space-between center">
+        
+        <span>Products : {{productsList.productsCount}} </span>
+        <products-sort on-change="productsList.sortChanged(sort)" property="name" order="1"></products-sort>
+    </div>
+</md-toolbar> -->
+    <md-toolbar class="md-table-toolbar md-default">
+        <div class="md-toolbar-tools">
+            <span>Products</span>
+            <div flex></div>
+            <dir-pagination-controls on-page-change="productsList.pageChanged(newPageNumber)"></dir-pagination-controls>
+        </div>
+    </md-toolbar>
+    <md-table-container>
+        <table md-table multiple>
+            <!-- md-row-select to enable row select -->
+            <thead md-head>
+                <tr md-row>
+                    <th md-column><span>Product Name</span></th>
+                    <th md-column md-numeric><span>Price</span></th>
+                    <th md-column><span>Images</span></th>
+                    <th md-column>Remove</th>
+                </tr>
+            </thead>
+            <tbody md-body>
+                <tr md-row dir-paginate="product in productsList.products | itemsPerPage: productsList.perPage" total-items="productsList.productsCount">
+                    <td md-cell>
+                        <a ui-sref="productDetails({ productId: product._id })">
+                            <strong>{{product.name | uppercase}}</strong>
+                        </a>
+                    </td>
+                    <td md-cell>RM{{product.price}}</td>
+                    <td md-cell>
+                        <div ng-if="product.images">
+                            <product-image images="product.images"></product-image>
+                        </div>
+                    </td>
+                    <td md-cell>
+                        <product-remove product="product"></product-remove>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </md-table-container>
+    <div layout="row" layout-align="space-between center">
+        <span class="total">Total : {{productsList.productsCount}} </span>
+        <dir-pagination-controls on-page-change="productsList.pageChanged(newPageNumber)"></dir-pagination-controls>
+    </div>
+</md-card>
+<!-- </div> -->

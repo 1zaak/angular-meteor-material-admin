@@ -2,13 +2,13 @@ import angular from 'angular';
 import angularMeteor from 'angular-meteor';
 import uiRouter from 'angular-ui-router';
 import { Meteor } from 'meteor/meteor';
-
+import ngMaterial from 'angular-material';
 import './productDetails.html';
 import { Products } from '../../../api/products/index';
 
 
 class ProductDetails {
-  constructor($stateParams, $scope, $reactive) {
+  constructor($stateParams, $scope, $reactive, $mdToast) {
     'ngInject';
 
     $reactive(this).attach($scope);
@@ -18,7 +18,7 @@ class ProductDetails {
 
     this.productId = $stateParams.productId;
 
-
+    this.toast = $mdToast; 
     this.helpers({
       product() {
         return Products.findOne({
@@ -43,6 +43,7 @@ class ProductDetails {
     }, (error) => {
       if (error) {
         console.log('Oops, unable to update the party...');
+        this.toast.show(this.toast.simple().textContent('No Entry!'));
       } else {
         console.log('Done!');
       }
@@ -55,6 +56,7 @@ const name = 'productDetails';
 // create a module
 export default angular.module(name, [
   angularMeteor,
+  ngMaterial,
   uiRouter
 ]).component(name, {
   templateUrl: `imports/ui/components/${name}/${name}.html`,

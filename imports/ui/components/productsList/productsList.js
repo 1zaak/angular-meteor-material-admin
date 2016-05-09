@@ -4,25 +4,29 @@ import ngMaterial from 'angular-material';
 import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 import './productsList.html';
+import './productAddModal.html';
 import { Products } from '../../../api/products/index';
 import { name as ProductAdd } from '../productAdd/productAdd';
 import { name as ProductRemove } from '../productRemove/productRemove';
 import { name as ProductsSort } from '../productsSort/productsSort';
-
+import { name as ProductImage } from '../productImage/productImage';
 
 class ProductsList {
-  constructor($scope, $reactive) {
+  constructor($scope, $reactive, $mdDialog) {
     'ngInject'
 
     $reactive(this).attach($scope);
 
-    this.perPage = 3;
+    this.$mdDialog = $mdDialog;
+    this.perPage = 10;
     this.page = 1;
     this.sort = {
       name: 1
     };
 
     this.searchText = '';
+    this.subscribe('users');
+    this.subscribe('images');
 
     this.subscribe('products', () => [{
       limit: parseInt(this.perPage),
@@ -60,7 +64,33 @@ class ProductsList {
     this.sort = sort;
   }
 
+  showAdd(ev) {
+    this.$mdDialog.show({
+      // controller: DialogController,
+      templateUrl: 'imports/ui/components/productsList/productAddModal.html',
+      parent: angular.element(document.body),
+      targetEvent: ev,
+      clickOutsideToClose: true,
+    // fullscreen: useFullScreen
+    }).then(function(answer) {
+      this.status = 'You said the information was "' + answer + '".';
+    }, function() {
+      this.status = 'You cancelled the dialog.';
+    });
+  }
 }
+
+// function DialogController($mdDialog) {
+//   this.hide = function() {
+//     $mdDialog.hide();
+//   };
+//   this.cancel = function() {
+//     $mdDialog.cancel();
+//   };
+//   this.answer = function(answer) {
+//     $mdDialog.hide(answer);
+//   };
+// }
 
 const name = 'productsList';
 
@@ -73,7 +103,8 @@ export default angular.module('productsList', [
   'md.data.table',
   ProductsSort,
   ProductAdd,
-  ProductRemove
+  ProductRemove,
+  ProductImage
 ])
   .component(name, {
     templateUrl: `imports/ui/components/${name}/${name}.html`,
@@ -82,11 +113,11 @@ export default angular.module('productsList', [
   })
   .config(config);
 
-function config($stateProvider) {
+function config($stateProvider ) {
   'ngInject';
   $stateProvider
     .state('products', {
       url: '/products',
-      template: '<products-list></products-list>'
+      template: '<products-list class="layout-column"></products-list>'
     });
 }

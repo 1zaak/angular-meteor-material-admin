@@ -4,7 +4,7 @@ import { Fake } from 'meteor/anti:fake';
 
 Meteor.startup(function () {
   if (Products.find().count()===0){
-     for (var i = 0; i < 5; i++) {
+     for (var i = 0; i < 50; i++) {
       let product = Fake.word();
       let price = Math.random() * (1000 - 1) + 1;
 

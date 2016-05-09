@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CORSConfiguration xmlns="http://s3.amazonaws.com/doc/2006-03-01/">
+    <CORSRule>
+        <AllowedOrigin>*</AllowedOrigin>
+        <AllowedMethod>PUT</AllowedMethod>
+        <AllowedMethod>POST</AllowedMethod>
+        <AllowedMethod>GET</AllowedMethod>
+        <AllowedMethod>HEAD</AllowedMethod>
+        <MaxAgeSeconds>3000</MaxAgeSeconds>
+        <AllowedHeader>*</AllowedHeader>
+    </CORSRule>
+</CORSConfiguration>
+<AWSAccessKeyId>AKIAJHFONT5PRJZDU2XQ</AWSAccessKeyId>
+<AWSSecretAccessKey>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</AWSSecretAccessKey>
