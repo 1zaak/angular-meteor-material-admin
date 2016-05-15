@@ -1,5 +1,5 @@
 # Admin web app using Angular-Meteor-Material
-This project was designed as the backend administration for the [Ecogiv](https://play.google.com/store/apps/details?id=com.ruizon.ecogivseller) app. It is also heavily inspired by the [Socially](http://www.angular-meteor.com/tutorials/socially/angular1/bootstrapping) app by [@urigo](https://github.com/Urigo).
+This project was designed as the backend administration for the [Ecogiv](https://play.google.com/store/apps/details?id=com.ruizon.ecogivseller) app. It is also heavily inspired by the [Socially](https://github.com/Urigo/meteor-angular-socially) app by [@urigo](https://github.com/Urigo).
 
 ## Design
 <img src="http://1zaak.github.io/ecogiv-admin.png" alt="Ecogiv Admin Material Design">
@@ -10,7 +10,7 @@ This can be used as a Mongo backend and you wanted a way to separate your server
 
 ## What's in the box
 
-Basically everything in the [Socially](http://www.angular-meteor.com/tutorials/socially/angular1/bootstrapping) app, i.e. Drag-&-Drop image feature, reactive sorting, pagination and search.
+Basically everything in the [Socially](https://github.com/Urigo/meteor-angular-socially) app, i.e. Drag-&-Drop image feature, reactive sorting, pagination and search.
 
 
 ## License
