@@ -12,6 +12,9 @@ This can be used as a Mongo backend and you wanted a way to separate your server
 
 Basically everything in the [Socially](https://github.com/Urigo/meteor-angular-socially) app, i.e. Drag-&-Drop image feature, reactive sorting, pagination and search.
 
+## Quick start
+
+Basically a meteor application. Just run `meteor` and you are good to go. You must register a user first (email & password) before you are able to create/update/delete a product.
 
 ## License
 Code licensed under MIT. 
