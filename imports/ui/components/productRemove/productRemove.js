@@ -4,12 +4,21 @@ import angularMeteor from 'angular-meteor';
 import './productRemove.html';
  
 class ProductRemove {
+ constructor($mdToast){
+  'ngInject'
+
+  
+  this.$mdToast = $mdToast;
+ }
   remove() {
-    console.log('remove product');
+    console.log('removing product..');
     if (this.product) {
-      Products.remove(this.product._id);
+      Products.remove(this.product._id, (err) => {
+        console.log("error during removing product (" + err + ")")
+        this.$mdToast.showSimple('Sorry you have no access..');
+
+      });
     };
-console.log('remove product successful!');
   }
 }
  

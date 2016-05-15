@@ -5,6 +5,7 @@ import uiRouter from 'angular-ui-router';
 import utilsPagination from 'angular-utils-pagination';
 import './productsList.html';
 import './productAddModal.html';
+import './pagination.tpl.html';
 import { Products } from '../../../api/products/index';
 import { name as ProductAdd } from '../productAdd/productAdd';
 import { name as ProductRemove } from '../productRemove/productRemove';
@@ -12,12 +13,13 @@ import { name as ProductsSort } from '../productsSort/productsSort';
 import { name as ProductImage } from '../productImage/productImage';
 
 class ProductsList {
-  constructor($scope, $reactive, $mdDialog) {
+  constructor($scope, $reactive, $mdDialog, $mdSidenav) {
     'ngInject'
 
     $reactive(this).attach($scope);
 
     this.$mdDialog = $mdDialog;
+    this.$mdSidenav = $mdSidenav;
     this.perPage = 10;
     this.page = 1;
     this.sort = {
@@ -71,12 +73,14 @@ class ProductsList {
       parent: angular.element(document.body),
       targetEvent: ev,
       clickOutsideToClose: true,
-    // fullscreen: useFullScreen
-    }).then(function(answer) {
-      this.status = 'You said the information was "' + answer + '".';
-    }, function() {
-      this.status = 'You cancelled the dialog.';
-    });
+    fullscreen: true
+    })
+  }
+  
+  toggleSidenav(menuId){
+
+    this.$mdSidenav(menuId).toggle();
+  
   }
 }
 

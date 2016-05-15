@@ -3,11 +3,14 @@
 <!-- <md-button class="md-primary md-raised" ng-click="productsList.showAdd($event)">Add</md-button> -->
 <md-toolbar class="md-hue-1 md-whiteframe-z2" layout="row" layout-align="start center">
     <!-- Use floating label instead of placeholder -->
+    <md-button ng-click="productsList.toggleSidenav('left')" hide-gt-md aria-label="Menu">
+            <md-icon md-svg-icon="navigation:ic_menu_24px"></md-icon>
+          </md-button>
     <md-icon class="icon-search" md-svg-icon="action:ic_search_24px" flex="5"></md-icon>
     <input class="input-main" md-input ng-model="productsList.searchText" type="text" placeholder="SEARCH" flex="80">
     <login-buttons flex="15" class="md-hue-2" align="left"></login-buttons>
 </md-toolbar>
-<md-card>
+<md-card class="card-table">
     <md-button class="md-fab md-fab-bottom-right" aria-label="Add" ng-click="productsList.showAdd($event)">
         <md-icon md-svg-icon="content:ic_add_24px"></md-icon>
     </md-button>
@@ -66,6 +69,7 @@
     <div layout="row" layout-align="space-between center">
         <span class="total">Total : {{productsList.productsCount}} </span>
         <dir-pagination-controls on-page-change="productsList.pageChanged(newPageNumber)"></dir-pagination-controls>
-    </div>
+        <!-- <dir-pagination-controls on-page-change="productsList.pageChanged(newPageNumber)" template-url="/imports/ui/components/productsList/pagination.tpl.html"></dir-pagination-controls>
+ -->    </div>
 </md-card>
 <!-- </div> -->

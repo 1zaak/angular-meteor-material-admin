@@ -12,7 +12,7 @@ angular.module('ecogiv-admin', [
 ]).config(config)
   
 
-  function config($locationProvider, $urlRouterProvider) {
+  function config($locationProvider, $urlRouterProvider, paginationTemplateProvider) {
   'ngInject';
  
   $locationProvider.html5Mode(true);

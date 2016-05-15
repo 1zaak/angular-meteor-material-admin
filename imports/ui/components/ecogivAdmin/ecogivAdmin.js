@@ -58,6 +58,8 @@ function config($locationProvider, $urlRouterProvider, $mdIconProvider, $mdThemi
       iconPath + 'svg-sprite-action.svg')
       .iconSet('content',
       iconPath + 'svg-sprite-content.svg')
+      .iconSet('navigation',
+      iconPath + 'svg-sprite-navigation.svg')
     
 }
 
